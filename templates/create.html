@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+<p>Title<input type="text" name="title"></p>
+<p>Content<input type="text" name="content"></p>
+{% comment %} <p><input type="file" name="sns_image"></p> {% endcomment %}
+<input type="hidden" name="author" value="{{ user.username }}">
+<input type="submit" value="create">
+</form>
+{% else %}
+Please login
+<a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+{% endblock content %}
